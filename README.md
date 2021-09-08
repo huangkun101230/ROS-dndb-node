@@ -39,7 +39,7 @@ This is a ROS node project which is obtained a denoised & deblurred (DNDB) model
 * Clone the git repository as the ROS package
 * [Create a catkin workspace](http://wiki.ros.org/catkin/Tutorials/create_a_workspace) and move the cloned directory in the source folder (your_catkin_ws/src)
 * Ensure ros_dndb_node.py is executable. Type `chmod +x ~/your_catkin_ws/src/ROS-dndb-node/ros_dndb_node.py`
-* To perform instance segmentation straight from a D435/D435i camera attached to a USB port:
+* To perform depth denoise & deblur manipulation straight from a D435/D435i camera attached to a USB port:
   * Type `roslaunch realsense2_camera rs_d400_and_t265.launch`
   * In a new terminal window, go to your ROS work space, type<br />
     `catkin_make`<br />
