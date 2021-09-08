@@ -1,5 +1,14 @@
 # ROS-dndb-node
-Description...
+This is a ROS node project which is obtained a denoised & deblurred (DNDB) model to work on the depth map (DM). It subscribes topics from a Intel® RealSense™ D435/D435i camera to get the real-time video, depth value, and points cloud, and publishes the 640 x 360 DNDB depth map on the topic called "DNDB_depth".
+<br />
+<br />
+| RGB | Original DM | DNDB DM |
+|     :---:    |     :---:      |     :---:     |
+| <img src="examples/input/rgb/1631080115.2456799.png" width="260">     | <img src="examples/input/depth/1631080115.2362533.png" width="260">       | <img src="examples/output/1631080128.3460805.png" width="260">      |
+| <img src="examples/input/rgb/1631080151.7598705.png" width="260">     | <img src="examples/input/depth/1631080151.751256.png" width="260">       | <img src="examples/output/1631080164.78647.png" width="260">      |
+| <img src="examples/input/rgb/1631080191.5774329.png" width="260">     | <img src="examples/input/depth/1631080191.564463.png" width="260">       | <img src="examples/output/1631080205.0342515.png" width="260">      |
+
+
 
 ## Usage
 
