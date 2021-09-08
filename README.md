@@ -33,8 +33,8 @@ Description...
 * To perform instance segmentation straight from a D435/D435i camera attached to a USB port:
   * Type `roslaunch realsense2_camera rs_d400_and_t265.launch`
   * In a new terminal window, go to your ROS work space, type
-    `catkin_make`
-    `source devel/setup.bash`
-    `rosrun ROS-dndb-node ros_dndb_node.py`
+    `catkin_make`<br />
+    `source devel/setup.bash`<br />
+    `rosrun ROS-dndb-node ros_dndb_node.py`<br />
   * If there are any complications, make sure the topic this node is subscribed to has the same name. Type `rostopic list` to see current topics published
 * To find the published depthmap, in a new terminal type `rostopic echo /DNDB_depth` or find both retrieved and published imges/depthmap in your directory `your_katkin_ws/src/ROS-dndb-node/exampes`
