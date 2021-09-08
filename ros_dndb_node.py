@@ -302,24 +302,6 @@ __WIDTH__ = 640
 __HEIGHT__ = 360
 
 def run_model(model_path: str, input: np.ndarray, device: str, scale: float):
-    ndf = 16 if False else 8
-    model_params = {
-        'width': __WIDTH__,
-        'height': __HEIGHT__,
-        'ndf': ndf,
-        'dilation': 1,
-        'norm_type': "elu",
-        'upsample_type': "nearest"
-    }
-
-    model = models.get_model(model_params).to(device)
-
-    deblur_model = DB(__WIDTH__, __HEIGHT__, ndf)
-    utils.init.initialize_weights(deblur_model, "src/ROS-dndb-node/default_name_deblur_epoch_50")
-    deblur_model = deblur_model.to(device)
-
-    utils.init.initialize_weights(model, model_path)
-
     uv_grid_t = create_image_domain_grid(model_params['width'], model_params['height'])
 
     if args.pointclouds:
@@ -340,9 +322,6 @@ def run_model(model_path: str, input: np.ndarray, device: str, scale: float):
             filename = input,
             scale = scale
         )
-
-    print("max: ", torch.max(depthmap[0,0]))
-    print("min: ", torch.min(depthmap[0,0]))
 
     mask, _ = get_mask(depthmap)
         
@@ -394,10 +373,30 @@ def parse_arguments(args):
 
 
 if __name__ == '__main__':
+    ###Initial Pytorch model###
     args, unknown = parse_arguments(sys.argv)
     gpus = [int(id) for id in args.gpu.split(',') if int(id) >= 0]
     device = torch.device("cuda:{}" .format(gpus[0]) if torch.cuda.is_available() and len(gpus) > 0 and gpus[0] >= 0 else "cpu")
 
+    ndf = 16 if args.autoencoder else 8
+    model_params = {
+        'width': __WIDTH__,
+        'height': __HEIGHT__,
+        'ndf': ndf,
+        'dilation': 1,
+        'norm_type': "elu",
+        'upsample_type': "nearest"
+    }
+
+    model = models.get_model(model_params).to(device)
+
+    deblur_model = DB(__WIDTH__, __HEIGHT__, ndf)
+    utils.init.initialize_weights(deblur_model, "src/ROS-dndb-node/default_name_deblur_epoch_50")
+    deblur_model = deblur_model.to(device)
+
+    utils.init.initialize_weights(model, args.model_path)
+
+    ###ROS Part###
     # publish a ROS topic of the denoised & deblurred depth results
     pub = rospy.Publisher('DNDB_depth', Image, queue_size=1)
 
@@ -434,3 +433,7 @@ if __name__ == '__main__':
         video_streamer.publish(dndb_depthmap)
         rospy.loginfo('A DNDB depthmap just published on DNDB_depth topic...')
         video_streamer.set_not_retrieved()
+
+        # garbage collection
+        # del output
+        torch.cuda.empty_cache()

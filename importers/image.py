@@ -37,8 +37,8 @@ def load_depth(filename, data_type=torch.float32, scale=0.0002):
 #    depth_data = (255-depth_img.astype(numpy.float32)) * scale / 100.
     depth_data = depth_img.astype(numpy.float32) * scale
 #    print("$$$$$$$$$$$$$$LOADING DEPTH MAP$$$$$$$$$$$$$$$$$")
-    print(filename, depth_data[74,74]);
-    print(filename, depth_data[60,60]);
+    # print(filename, depth_data[74,74]);
+    # print(filename, depth_data[60,60]);
     return torch.from_numpy(
         depth_data.reshape(1, 1, h, w)        
     ).type(data_type)

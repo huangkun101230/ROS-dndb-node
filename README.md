@@ -38,3 +38,4 @@ Description...
     `rosrun ROS-dndb-node ros_dndb_node.py`
   * If there are any complications, make sure the topic this node is subscribed to has the same name. Type `rostopic list` to see current topics published
 * To find the published depthmap, in a new terminal type `rostopic echo /DNDB_depth` or find both retrieved and published imges/depthmap in your directory `your_katkin_ws/src/ROS-dndb-node/exampes`
+* Press `Ctrl + c` or `Ctrl + z` to stop
