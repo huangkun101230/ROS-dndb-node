@@ -32,9 +32,9 @@ Description...
 * Ensure ros_dndb_node.py is executable. Type `chmod +x ~/your_catkin_ws/src/ROS-dndb-node/ros_dndb_node.py`
 * To perform instance segmentation straight from a D435/D435i camera attached to a USB port:
   * Type `roslaunch realsense2_camera rs_d400_and_t265.launch`
-  * In a new terminal window, go to your ROS work space, type
+  * In a new terminal window, go to your ROS work space, type<br />
     `catkin_make`<br />
     `source devel/setup.bash`<br />
-    `rosrun ROS-dndb-node ros_dndb_node.py`<br />
+    `rosrun ROS-dndb-node ros_dndb_node.py`
   * If there are any complications, make sure the topic this node is subscribed to has the same name. Type `rostopic list` to see current topics published
 * To find the published depthmap, in a new terminal type `rostopic echo /DNDB_depth` or find both retrieved and published imges/depthmap in your directory `your_katkin_ws/src/ROS-dndb-node/exampes`
