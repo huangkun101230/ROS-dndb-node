@@ -24,7 +24,7 @@ This is a ROS node project which is obtained a denoised & deblurred (DNDB) model
 - PyRealSense `pip install pyrealsense2`
 - ROS Kinetic/Melodic
 - [Intel RealSense ROS wrapper](https://github.com/IntelRealSense/realsense-ros)
-- [Catkin](www.ros.org/wiki/catkin#Installing_catkin)
+- [Catkin](https://www.ros.org/wiki/catkin#Installing_catkin)
 - gcc & g++ ≥ 4.9
 
 **My Environment**
